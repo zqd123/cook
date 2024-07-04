@@ -1,0 +1,35 @@
+POST https://www.letuo.club/apis/orderEvent/query HTTP/1.1
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: https://www.letuo.club
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Connection: keep-alive
+Date: Wed, 03 Jul 2024 07:00:12 GMT
+Expires: 0
+Pragma: no-cache
+Server: nginx/1.20.1
+Transfer-Encoding: chunked
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-Xss-Protection: 1; mode=block POST /apis/orderEvent/query HTTP/1.1
+Accept: application/json, text/plain, */*
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,en-GB;q=0.6,en-US;q=0.5
+Connection: keep-alive
+Content-Length: 102
+Content-Type: application/json
+Cookie: JSESSIONID=21C3BBFB53C7E837E4097FFB1A02E085
+Host: www.letuo.club
+Origin: https://www.letuo.club
+Referer: https://www.letuo.club/meal/index/myOrderEvents
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-origin
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0
+sec-ch-ua: "Not/A)Brand";v="8", "Chromium";v="126", "Microsoft Edge";v="126"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+
+{"pageIndex":1,"pageSize":10,"sortField":"id","sortType":"descending","value":{"teamId":11,"name":""}}
