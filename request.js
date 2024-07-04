@@ -17,7 +17,7 @@ function login({ username, password }) {
 /**
  * 获取eventId列表
  * @param {string} param0 cookie
- * @returns 
+ * @returns
  */
 function getEventId({ cookie }) {
   return axios({
@@ -44,9 +44,9 @@ function getEventId({ cookie }) {
  * @param {string} param0 cookie
  * @param {string} eventId 今日eventId
  * @param {object} cook 订单信息
- * @returns 
+ * @returns
  */
-function submitCook({ cookie, eventId, cook }) {
+function submitCook({ cookie, eventId, teamId, cook }) {
   return axios({
     method: "post",
     baseURL: baseUrl,
@@ -56,6 +56,11 @@ function submitCook({ cookie, eventId, cook }) {
     },
     data: {
       eventId,
+      teamId,
+      createrId: 0,
+      createrName: "",
+      num: 1,
+      status: 0,
       ...cook,
     },
   });
@@ -64,7 +69,7 @@ function submitCook({ cookie, eventId, cook }) {
  * 获取已定单
  * @param {string} param0 cookie
  * @param {string} eventId 今日eventId
- * @returns 
+ * @returns
  */
 function getExitSubmit({ cookie, eventId }) {
   return axios({
@@ -84,7 +89,7 @@ function getExitSubmit({ cookie, eventId }) {
  * @param {string} param0 cookie
  * @param {string} eventId 今日eventId
  * @param {object} cook 订单信息
- * @returns 
+ * @returns
  */
 function cancelOrder({ cookie, eventId, cook }) {
   return axios({
@@ -101,4 +106,4 @@ function cancelOrder({ cookie, eventId, cook }) {
   });
 }
 
-module.exports = { login, getEventId, submitCook, getExitSubmit,cancelOrder };
+module.exports = { login, getEventId, submitCook, getExitSubmit, cancelOrder };

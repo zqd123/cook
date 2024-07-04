@@ -393,26 +393,33 @@ const submitMenus = [
   {
     productId: 16,
     name: "紫燕夫妻肺片套餐",
-  },
-  {
-    productId: 20,
-    name: "老乡鸡小炒肉",
-  },
-  {
-    productId: 24,
-    name: "地锅鸡",
+    productName:'紫燕夫妻肺片套餐',
+
   },
   {
     productId: 37,
     name: "北京烤鸭套餐",
+    productName:'北京烤鸭套餐',
+  },
+  {
+    productId: 24,
+    name: "地锅鸡",
+    productName:'地锅鸡',
+  },
+  {
+    productId: 20,
+    name: "老乡鸡小炒肉",
+    productName:'老乡鸡小炒肉',
   },
   {
     productId: 109,
     name: "黄焖鸡茄子",
+    productName:'黄焖鸡茄子',
   },
   {
     productId: 107,
     name: "稻香世家套餐",
+    productName:'稻香世家套餐',
   },
 ];
 
