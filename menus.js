@@ -394,32 +394,43 @@ const submitMenus = [
     productId: 16,
     name: "紫燕夫妻肺片套餐",
     productName:'紫燕夫妻肺片套餐',
-
+    avatar:
+      "https://www.letuo.club/meal/meal/36_896c0708258c4aefacedaee94d93361a.jpeg",
   },
   {
     productId: 37,
     name: "北京烤鸭套餐",
     productName:'北京烤鸭套餐',
+    avatar:
+      "https://www.letuo.club/meal/meal/36_7502fa6249254a43a302ea8ba5b585c7.png",
   },
   {
     productId: 24,
     name: "地锅鸡",
     productName:'地锅鸡',
+    avatar:
+      "https://www.letuo.club/meal/meal/4_fb2059e806e74832957ad20295577077.png",
   },
   {
     productId: 20,
     name: "老乡鸡小炒肉",
     productName:'老乡鸡小炒肉',
+    avatar:
+      "https://www.letuo.club/meal/meal/4_d99ecd3cce3046cba8734d331e5d1105.png",
   },
   {
     productId: 109,
     name: "黄焖鸡茄子",
     productName:'黄焖鸡茄子',
+    avatar:
+      "https://www.letuo.club/meal/meal/36_b697ada05c5d424caf2995b596357e3a.jpg",
   },
   {
     productId: 107,
     name: "稻香世家套餐",
     productName:'稻香世家套餐',
+    avatar:
+      "https://www.letuo.club/meal/meal/36_ddbc6ac111fa43fea02a49c008aac4ad.jpg",
   },
 ];
 
