@@ -13,7 +13,7 @@ let cookieGlobal = "";
 let eventGlobal = "";
 
 /** 定时登陆 */
-schedule.scheduleJob("30 36 16 * * 5", async () => {
+schedule.scheduleJob("50 1 10 ? * 1", async () => {
   // 登录
   const loginRes = await login(userConfig);
   cookieGlobal = loginRes.headers["set-cookie"][0].split(";")[0];

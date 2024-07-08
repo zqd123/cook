@@ -13,7 +13,7 @@ let cookieGlobal = "";
 let eventGlobal = "";
 
 /** 定时登陆 */
-schedule.scheduleJob("0 59 15 * * 2,4", async () => {
+schedule.scheduleJob("0 59 15 ? * 2,4", async () => {
   // 登录
   const loginRes = await login(userConfig);
   cookieGlobal = loginRes.headers["set-cookie"][0].split(";")[0];
@@ -21,7 +21,7 @@ schedule.scheduleJob("0 59 15 * * 2,4", async () => {
 });
 
 /** 下单 */
-schedule.scheduleJob("0 0 16 * * 2,4", async () => {
+schedule.scheduleJob("0 0 16 ? * 2,4", async () => {
   // 获取eventId
   const eventRes = await getEventId({ cookie: cookieGlobal });
   eventGlobal = eventRes.data.data[0].eventId;
