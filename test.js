@@ -1,56 +1,86 @@
 const schedule = require("node-schedule");
-const { login, getEventId, submitCook } = require("./request");
+const { login, getEventId, submitCook, cancelOrder} = require("./request");
 /** 菜单数据 */
-const { submitMenus } = require("./menus");
+const { likeMenus } = require("./menus");
 /** 用户信息 */
 const userConfig = {
-  username: "zhangqd@digiwin.com",
-  password: "Tianle199204",
+  username: "",
+  password: "",
 };
 /** 用户cookie */
 let cookieGlobal = "";
 /** 今日eventId */
 let eventGlobal = "";
+/** 下单成功的菜品 */
+let successCookGlobal = {};
+
+/**
+ * 获取eventId
+ */
+async function initEvent(){
+  const eventRes = await getEventId({ cookie: cookieGlobal });
+ eventGlobal = eventRes.data.data[0].eventId;
+ console.log("获取eventId成功！！！");
+}
+/**
+ * 下单
+ * @param {object} cook 某个菜品
+ */
+async function submitMenu(cook){
+  const submitRes = await submitCook({
+    cookie: cookieGlobal,
+    eventId: eventGlobal,
+    teamId: 11,
+    cook: cook,
+  });
+  if (submitRes.data?.status === 200) {
+    successCookGlobal = submitRes.data?.data;
+    console.log("点单成功!，菜品是：",submitRes.data?.data?.name);
+  }else {
+    console.log("点单失败:",cook.productName);
+    // Promise.reject("点单失败");
+    throw new Error("点单失败");
+  }
+}
+/**
+ * 循环下单
+ */
+async function cycleSubmit(){
+  for (const item of likeMenus) {
+    try {
+      await submitMenu(item);
+      break;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
 
 /** 定时登陆 */
-schedule.scheduleJob("50 1 10 ? * 1", async () => {
-  // 登录
+schedule.scheduleJob("0 51 9 * * ?", async () => {
   const loginRes = await login(userConfig);
   cookieGlobal = loginRes.headers["set-cookie"][0].split(";")[0];
-  console.log("登陆成功！！！", "用户cookie：", cookieGlobal);
+  console.log("登陆成功！！！");
 });
 
-/** 下单 */
-schedule.scheduleJob("5 33 16 * * ?", async () => {
-  // 获取eventId
-  const eventRes = await getEventId({ cookie: cookieGlobal });
-  eventGlobal = eventRes.data.data[0].eventId;
-  console.log(
-    "获取eventId成功！！！",
-    "eventId:",
-    eventGlobal,
-    ";状态：",
-    eventRes?.data?.data[0]?.status
-  );
-  // 点单
-  for (const item of submitMenus) {
-    const submitRes = await submitCook({
-      cookie: cookieGlobal,
-      eventId: eventGlobal,
-      teamId: 11,
-      cook: item,
-    });
-    console.log(submitRes.data);
+/** 准时下单 */
+schedule.scheduleJob("0 52 9 * * ?", async () => {
+  await initEvent();
+  await cycleSubmit();
+});
+
+/** 几秒后取消订单-重新下单 */
+schedule.scheduleJob("5 52 9 * * ?", async () => {
+  const res = await cancelOrder({
+    cookie: cookieGlobal,
+    eventId: eventGlobal,
+    teamId: 11,
+    cook: successCookGlobal,
+  })
+  console.log('取消订单：',res.data);
+  try {
+    submitMenu(successCookGlobal);
+  } catch (error) {
+    cycleSubmit();
   }
 });
-
-// (async ()=>{
-//    const res = await submitCook({
-//         cookie: 'JSESSIONID=F061CD68C355B990A1314F186578AA49',
-//         eventId: 'db25ce39b1d84f2185ede987eafb289c',
-//         teamId: 11,
-//         cook: submitMenus[0],
-//       });
-//       console.log(res);
-      
-// })()

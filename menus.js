@@ -389,7 +389,7 @@ const targetMenus = [
   },
 ];
 
-const submitMenus = [
+const likeMenus = [
   {
     productId: 16,
     name: "紫燕夫妻肺片套餐",
@@ -437,5 +437,5 @@ const submitMenus = [
 module.exports = {
   allMenus,
   targetMenus,
-  submitMenus,
+  likeMenus,
 };
