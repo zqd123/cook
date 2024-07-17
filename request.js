@@ -23,19 +23,12 @@ function getEventId({ cookie }) {
   return axios({
     method: "post",
     baseURL: baseUrl,
-    url: "/apis/orderEvent/query",
+    url: "/apis/orderEvent/activeEvents",
     headers: {
       Cookie: cookie,
     },
     data: {
-      pageIndex: 1,
-      pageSize: 10,
-      sortField: "id",
-      sortType: "descending",
-      value: {
-        teamId: 11,
-        name: "",
-      },
+      ids: [11],
     },
   });
 }
@@ -105,5 +98,36 @@ function cancelOrder({ cookie, eventId, cook }) {
     },
   });
 }
+/** 抢购紫燕百味鸡 */
+function submitZiYan(cookie, eventId) {
+  return axios({
+    method: "post",
+    baseURL: baseUrl,
+    url: "/apis/order/submit",
+    headers: {
+      Cookie: cookie,
+    },
+    data: {
+      eventId,
+      createrId: 0,
+      createrName: "",
+      num: 1,
+      status: 0,
+      teamId: 11,
+      productId: 16,
+      name: "紫燕夫妻肺片套餐",
+      productName: "紫燕夫妻肺片套餐",
+      avatar:
+        "https://www.letuo.club/meal/meal/36_896c0708258c4aefacedaee94d93361a.jpeg",
+    },
+  });
+}
 
-module.exports = { login, getEventId, submitCook, getExitSubmit, cancelOrder };
+module.exports = {
+  login,
+  getEventId,
+  submitCook,
+  getExitSubmit,
+  cancelOrder,
+  submitZiYan,
+};

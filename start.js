@@ -1,5 +1,11 @@
 const schedule = require("node-schedule");
-const { login, getEventId, submitCook, cancelOrder} = require("./request");
+const {
+  login,
+  getEventId,
+  submitCook,
+  cancelOrder,
+  submitZiYan,
+} = require("./request");
 /** 菜单数据 */
 const { likeMenus } = require("./menus");
 /** 用户信息 */
@@ -17,16 +23,16 @@ let successCookGlobal = {};
 /**
  * 获取eventId
  */
-async function initEvent(){
+async function initEvent() {
   const eventRes = await getEventId({ cookie: cookieGlobal });
- eventGlobal = eventRes.data.data[0].eventId;
- console.log("获取eventId成功！！！");
+  eventGlobal = eventRes.data.data[0].eventId;
+  console.log("获取eventId成功！！！");
 }
 /**
  * 下单
  * @param {object} cook 某个菜品
  */
-async function submitMenu(cook){
+async function submitMenu(cook) {
   const submitRes = await submitCook({
     cookie: cookieGlobal,
     eventId: eventGlobal,
@@ -35,9 +41,9 @@ async function submitMenu(cook){
   });
   if (submitRes.data?.status === 200) {
     successCookGlobal = submitRes.data?.data;
-    console.log("点单成功!，菜品是：",submitRes.data?.data?.name);
-  }else {
-    console.log("点单失败:",cook.productName);
+    console.log("点单成功!，菜品是：", submitRes.data?.data?.name);
+  } else {
+    console.log("点单失败:", cook.productName);
     // Promise.reject("点单失败");
     throw new Error("点单失败");
   }
@@ -45,7 +51,7 @@ async function submitMenu(cook){
 /**
  * 循环下单
  */
-async function cycleSubmit(){
+async function cycleSubmit() {
   for (const item of likeMenus) {
     try {
       await submitMenu(item);
@@ -62,22 +68,45 @@ schedule.scheduleJob("0 59 15 ? * 2,4", async () => {
   cookieGlobal = loginRes.headers["set-cookie"][0].split(";")[0];
   console.log("登陆成功！！！");
 });
-
-/** 准时下单 */
+/** 准点-先抢紫燕百味鸡 */
 schedule.scheduleJob("0 0 16 ? * 2,4", async () => {
   await initEvent();
-  await cycleSubmit();
+  const submitRes = Promise.race([
+    submitZiYan(cookieGlobal, eventGlobal),
+    submitZiYan(cookieGlobal, eventGlobal),
+    submitZiYan(cookieGlobal, eventGlobal),
+    submitZiYan(cookieGlobal, eventGlobal),
+    submitZiYan(cookieGlobal, eventGlobal),
+  ]);
+  if (submitRes.data?.status === 200) {
+    successCookGlobal = submitRes.data?.data;
+    console.log("抢购紫燕成功!");
+  } else {
+    console.log("抢购紫燕失败！");
+    // Promise.reject("点单失败");
+    throw new Error("点单失败");
+  }
+});
+
+/** 准时下单 */
+schedule.scheduleJob("3 0 16 ? * 2,4", async () => {
+  if (eventGlobal) {
+    await cycleSubmit();
+  }else{
+    await initEvent();
+    await cycleSubmit();
+  }
 });
 
 /** 几秒后取消订单-重新下单 */
-schedule.scheduleJob("5 0 16 ? * 2,4", async () => {
+schedule.scheduleJob("10 0 16 ? * 2,4", async () => {
   const res = await cancelOrder({
     cookie: cookieGlobal,
     eventId: eventGlobal,
     teamId: 11,
     cook: successCookGlobal,
-  })
-  console.log('取消订单：',res.data);
+  });
+  console.log("取消订单：", res.data);
   try {
     submitMenu(successCookGlobal);
   } catch (error) {
