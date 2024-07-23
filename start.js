@@ -25,7 +25,7 @@ let successCookGlobal = {};
  */
 async function initEvent() {
   const eventRes = await getEventId({ cookie: cookieGlobal });
-  eventGlobal = eventRes.data.data[0].eventId;
+  eventGlobal = eventRes.data.data[0]?.eventId;
   console.log("获取eventId成功！！！");
 }
 /**
