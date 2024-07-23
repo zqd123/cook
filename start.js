@@ -57,7 +57,7 @@ async function cycleSubmit() {
       await submitMenu(item);
       break;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }
 }
@@ -69,7 +69,7 @@ schedule.scheduleJob("0 59 15 ? * 2,4", async () => {
   console.log("登陆成功！！！");
 });
 /** 准点-先抢紫燕百味鸡 */
-schedule.scheduleJob("0 0 16 ? * 2,4", async () => {
+schedule.scheduleJob("59 59 15 ? * 2,4", async () => {
   await initEvent();
   const submitRes = Promise.race([
     submitZiYan(cookieGlobal, eventGlobal),
@@ -84,12 +84,12 @@ schedule.scheduleJob("0 0 16 ? * 2,4", async () => {
   } else {
     console.log("抢购紫燕失败！");
     // Promise.reject("点单失败");
-    throw new Error("点单失败");
+    // throw new Error("点单失败");
   }
 });
 
 /** 准时下单 */
-schedule.scheduleJob("3 0 16 ? * 2,4", async () => {
+schedule.scheduleJob("0 0 16 ? * 2,4", async () => {
   if (eventGlobal) {
     await cycleSubmit();
   }else{

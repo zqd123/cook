@@ -334,60 +334,6 @@ const allMenus = [
   },
 ];
 
-const targetMenus = [
-  {
-    id: 16,
-    name: "紫燕夫妻肺片套餐",
-    description: "",
-    avatar:
-      "https://www.letuo.club/meal/meal/36_896c0708258c4aefacedaee94d93361a.jpeg",
-    status: 2,
-    price: 3000,
-    teamId: 11,
-    teamName: "",
-    shopId: 7,
-    shopName: "",
-    createrName: "",
-    createTime: "2024-06-05T17:38:03",
-    dayLimit: 1,
-    orderCountVo: 1,
-  },
-  {
-    id: 24,
-    name: "地锅鸡",
-    description: "",
-    avatar:
-      "https://www.letuo.club/meal/meal/4_fb2059e806e74832957ad20295577077.png",
-    status: 2,
-    price: 3000,
-    teamId: 11,
-    teamName: "",
-    shopId: 9,
-    shopName: "",
-    createrName: "",
-    createTime: "2024-06-05T17:38:14",
-    dayLimit: 1,
-    orderCountVo: 1,
-  },
-  {
-    id: 37,
-    name: "北京烤鸭套餐",
-    description: "",
-    avatar:
-      "https://www.letuo.club/meal/meal/36_7502fa6249254a43a302ea8ba5b585c7.png",
-    status: 2,
-    price: 3000,
-    teamId: 11,
-    teamName: "",
-    shopId: 11,
-    shopName: "",
-    createrName: "",
-    createTime: "2024-05-27T16:20:18",
-    selfHelp: false,
-    dayLimit: 4,
-    orderCountVo: 4,
-  },
-];
 
 const likeMenus = [
   {
@@ -398,13 +344,6 @@ const likeMenus = [
       "https://www.letuo.club/meal/meal/36_896c0708258c4aefacedaee94d93361a.jpeg",
   },
   {
-    productId: 37,
-    name: "北京烤鸭套餐",
-    productName:'北京烤鸭套餐',
-    avatar:
-      "https://www.letuo.club/meal/meal/36_7502fa6249254a43a302ea8ba5b585c7.png",
-  },
-  {
     productId: 24,
     name: "地锅鸡",
     productName:'地锅鸡',
@@ -412,18 +351,46 @@ const likeMenus = [
       "https://www.letuo.club/meal/meal/4_fb2059e806e74832957ad20295577077.png",
   },
   {
+    productId: 66,
+    name: "曾三仙-四仙米线",
+    productName:'曾三仙-四仙米线',
+    avatar:
+      "https://www.letuo.club/meal/meal/36_688879a0e7924bb6b5ce5599184b57cf.jpg",
+  },
+  {
+    productId: 65,
+    name: "米村-金枪鱼拌饭",
+    productName:'米村-金枪鱼拌饭',
+    avatar:
+      "https://www.letuo.club/meal/meal/36_7a6553fc362640d984745cfcfdcf7bc8.jpg",
+  },
+  {
+    productId: 71,
+    name: "巴蜀-回锅肉",
+    productName:'巴蜀-回锅肉',
+    avatar:
+      "https://www.letuo.club/meal/meal/36_c867f19d3fdd4494a5f41db33be6cc86.jpg",
+  },
+  {
     productId: 20,
     name: "老乡鸡小炒肉",
     productName:'老乡鸡小炒肉',
     avatar:
-      "https://www.letuo.club/meal/meal/4_d99ecd3cce3046cba8734d331e5d1105.png",
+    "https://www.letuo.club/meal/meal/4_d99ecd3cce3046cba8734d331e5d1105.png",
+  },
+  {
+    productId: 37,
+    name: "北京烤鸭套餐",
+    productName:'北京烤鸭套餐',
+    avatar:
+    "https://www.letuo.club/meal/meal/36_7502fa6249254a43a302ea8ba5b585c7.png",
   },
   {
     productId: 109,
     name: "黄焖鸡茄子",
     productName:'黄焖鸡茄子',
     avatar:
-      "https://www.letuo.club/meal/meal/36_b697ada05c5d424caf2995b596357e3a.jpg",
+    "https://www.letuo.club/meal/meal/36_b697ada05c5d424caf2995b596357e3a.jpg",
   },
   {
     productId: 107,
@@ -436,6 +403,5 @@ const likeMenus = [
 
 module.exports = {
   allMenus,
-  targetMenus,
   likeMenus,
 };
